@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Películas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f7;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #d1f7ff;
+        }
+
+        .btn-primary, .btn-custom {
+            background-color: #6c63ff;
+            color: white;
+        }
+
+        .btn-primary:hover, .btn-custom:hover {
+            background-color: #4e44d4;
+        }
+
+        .btn-warning {
+            background-color: #ff8a00;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #cc6c00;
+        }
+
+        .btn-danger {
+            background-color: #ff4136;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #d0352b;
+        }
+
+        .table-dark {
+            background-color: #003366;
+        }
+
+        .table-dark th, .table-dark td {
+            color: white;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dfe6e9;
+        }
+
+        h1, h2 {
+            color: #3f3d56;
+        }
+
+        .container {
+            max-width: 90%;
+        }
+
+        .table-responsive {
+            margin-top: 30px;
+        }
+
+        .alert-info {
+            background-color: #5bc0de;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Mantenimiento de Películas</h1>
+    </div>
+
+    <div class="container mb-4">
+        <div th:if="${message}" class="alert alert-info alert-dismissible fade show mx-auto w-50" role="alert">
+            <p th:text="${message}"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="text-end mb-4">
+        <a href="/maintenance/create" class="btn btn-custom btn-lg">
+            Agregar Película
+        </a>
+    </div>
+
+    <div class="table-responsive mx-auto">
+        <table class="table table-bordered table-hover align-middle shadow-sm">
+            <thead class="table-dark">
+            <tr>
+                <th class="border">Código</th>
+                <th class="border">Título</th>
+                <th class="border">Idioma</th>
+                <th class="border">Alquiler (Días)</th>
+                <th class="border">Precio (USD)</th>
+                <th class="border">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="film : ${films}">
+                <td class="border">
+                    <a th:href="@{/maintenance/detail/{id}(id=${film.filmId()})}" th:text="${film.filmId()}" class="btn btn-primary btn-sm">
+                        Ver
+                    </a>
+                </td>
+                <td class="border" th:text="${film.title()}"></td>
+                <td class="border" th:text="${film.language()}"></td>
+                <td class="border" th:text="${film.rentalDuration()}"></td>
+                <td class="border" th:text="${film.rentalRate()}"></td>
+                <td class="border">
+                    <!-- Botón Editar -->
+                    <a th:href="@{/maintenance/edit/{id}(id=${film.filmId()})}" class="btn btn-warning btn-sm">
+                        Editar
+                    </a>
+                    <!-- Botón Eliminar -->
+                    <form th:action="@{/maintenance/delete/{id}(id=${film.filmId()})}" method="post" class="d-inline" onsubmit="return confirmDelete();">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmDelete() {
+        return confirm("¿Estás seguro de que deseas eliminar la película?");
+    }
+</script>
+
+</body>
+</html>

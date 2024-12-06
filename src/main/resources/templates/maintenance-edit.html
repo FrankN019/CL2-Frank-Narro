@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Película</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-secondary text-white">
+
+<div class="container py-5">
+
+    <!-- Encabezado de la sección -->
+    <div class="mb-5 text-center">
+        <h3 class="text-warning">Editar Película</h3>
+        <p class="text-muted">Actualiza los detalles de la película seleccionada</p>
+    </div>
+
+    <!-- Formulario -->
+    <form th:object="${film}" th:action="@{/maintenance/edit-confirm}" method="post" class="bg-dark p-4 rounded shadow-lg">
+
+        <!-- Código de la película -->
+        <div class="mb-4 row">
+            <label for="filmId" class="col-sm-3 col-form-label text-light">Código</label>
+            <div class="col-sm-9">
+                <input type="text" id="filmId" th:field="*{filmId}" class="form-control bg-dark text-white" readonly>
+            </div>
+        </div>
+
+        <!-- Título de la película -->
+        <div class="mb-4 row">
+            <label for="title" class="col-sm-3 col-form-label text-light">Título</label>
+            <div class="col-sm-9">
+                <input type="text" id="title" th:field="*{title}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Descripción de la película -->
+        <div class="mb-4 row">
+            <label for="description" class="col-sm-3 col-form-label text-light">Descripción</label>
+            <div class="col-sm-9">
+                <input type="text" id="description" th:field="*{description}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Año de filmación -->
+        <div class="mb-4 row">
+            <label for="releaseYear" class="col-sm-3 col-form-label text-light">Año de filmación</label>
+            <div class="col-sm-9">
+                <input type="text" id="releaseYear" th:field="*{releaseYear}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Tiempo de alquiler -->
+        <div class="mb-4 row">
+            <label for="rentalDuration" class="col-sm-3 col-form-label text-light">Tiempo de alquiler (Días)</label>
+            <div class="col-sm-9">
+                <input type="text" id="rentalDuration" th:field="*{rentalDuration}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Precio de alquiler -->
+        <div class="mb-4 row">
+            <label for="rentalRate" class="col-sm-3 col-form-label text-light">Precio de alquiler (USD)</label>
+            <div class="col-sm-9">
+                <input type="text" id="rentalRate" th:field="*{rentalRate}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Duración de la película -->
+        <div class="mb-4 row">
+            <label for="length" class="col-sm-3 col-form-label text-light">Duración de la película (Minutos)</label>
+            <div class="col-sm-9">
+                <input type="text" id="length" th:field="*{length}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Costo de reemplazo -->
+        <div class="mb-4 row">
+            <label for="replacementCost" class="col-sm-3 col-form-label text-light">Costo de reemplazo (USD)</label>
+            <div class="col-sm-9">
+                <input type="text" id="replacementCost" th:field="*{replacementCost}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Categoría de la película -->
+        <div class="mb-4 row">
+            <label for="rating" class="col-sm-3 col-form-label text-light">Categoría</label>
+            <div class="col-sm-9">
+                <input type="text" id="rating" th:field="*{rating}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Características de la película -->
+        <div class="mb-4 row">
+            <label for="specialFeatures" class="col-sm-3 col-form-label text-light">Características de la película</label>
+            <div class="col-sm-9">
+                <input type="text" id="specialFeatures" th:field="*{specialFeatures}" class="form-control bg-dark text-white" required>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="mb-4 row">
+            <div class="col-sm-9 offset-sm-3">
+                <!-- Botón para actualizar -->
+                <button type="submit" class="btn btn-success w-25">
+                    Actualizar
+                </button>
+
+                <!-- Botón para cancelar -->
+                <button type="button" class="btn btn-danger w-25" onclick="location.href='/maintenance/start'">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Bootstrap 5.3 JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
